@@ -8,9 +8,9 @@ class TopPanel extends Component {
         <table>
           <thead>
             <tr>
-              <th>#</th>
-              <th>Expected Output</th>
-              <th>Actual Output</th>
+              <th className="table-key-column">#</th>
+              <th className="table-output-column">Expected Output</th>
+              <th className="table-output-column">Actual Output</th>
               <th>Status</th>
               <th></th>
             </tr>
@@ -18,6 +18,7 @@ class TopPanel extends Component {
           <tbody>
             {this.props.currentProject ? this.props.currentProject.issues.map((issue, idx) => {
               return (
+                <>
                 <tr key={idx + 1}>
                   <td>{idx + 1}</td>
                   <td>{issue.expected_output}</td>
@@ -32,6 +33,8 @@ class TopPanel extends Component {
                     </span>
                   </td>
                 </tr>
+                {/*issue.id === 2 ? <><p>hibfwehbfewifubew</p></> : null*/}
+                </>
               )
             }) : null}
           </tbody>

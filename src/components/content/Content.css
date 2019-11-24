@@ -32,6 +32,20 @@ table, th, td {
   text-align: center;
 }
 
+td {
+  font-size: 14px;
+  padding: 6px 10px;
+  line-height: 1;
+}
+
+.table-key-column {
+  width: 50px;
+}
+
+.table-output-column {
+  width: 500px;
+}
+
 form {
   line-height: 2;
 }
@@ -47,4 +61,7 @@ textarea {
   padding-bottom: 0;
   vertical-align: middle;
   width: 70vw;
+  float: right;
+  clear: both;
+  margin-right: 100px;
 }
