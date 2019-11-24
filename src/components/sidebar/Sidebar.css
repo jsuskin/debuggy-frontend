@@ -14,3 +14,7 @@
 .sidebar-project-li {
   cursor: pointer;
 }
+
+.selected-project {
+  opacity: 0.4;
+}

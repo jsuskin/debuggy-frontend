@@ -12,13 +12,39 @@
   padding: 40px 60px;
 }
 
+.add-new-issue-header {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.select-project-default {
+  display: none;
+}
+
 table {
   width: 100%;
-  line-height: 1.7;
+  line-height: 1.9;
 }
 
 table, th, td {
   border: 1px solid hsla(0, 0%, 0%, 0.2);
   border-collapse: collapse;
   text-align: center;
+}
+
+form {
+  line-height: 2;
+}
+
+select {
+  cursor: pointer;
+}
+
+textarea {
+  outline: none;
+  resize: none;
+  padding-top: 1px;
+  padding-bottom: 0;
+  vertical-align: middle;
+  width: 70vw;
 }

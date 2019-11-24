@@ -2,14 +2,22 @@ import React, { Component } from 'react';
 import Header from './components/header/Header';
 import Sidebar from './components/sidebar/Sidebar';
 import Content from './components/content/Content';
-import * as data from './data/constants'
 import './App.css';
 
 class App extends Component {
   state = {
-    projects: data.projects,
-    currentProject: data.projects[0],
+    projects: [],
+    currentProject: null,
     theme: 'light-theme'
+  }
+
+  componentDidMount() {
+    fetch(`http://localhost:3000/projects`)
+      .then(res => res.json())
+      .then(projects => this.setState({
+        projects: projects,
+        currentProject: projects[0]
+      }))
   }
 
   handleThemeChange = () => {
@@ -22,22 +30,33 @@ class App extends Component {
     this.setState({ currentProject: project })
   }
 
+  handleDeleteIssue = () => {
+    console.log('deleting issue')
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log('submitting issue');
+  }
+
   render() {
     const { projects, currentProject, theme } = this.state;
 
     return (
       <div className={`app ${this.state.theme}`}>
         <Header
-          handleThemeChange={this.handleThemeChange}
           theme={theme}
+          handleThemeChange={this.handleThemeChange}
         />
         <Sidebar
           projects={projects}
           handleProjectSelect={this.handleProjectSelect}
+          currentProject={currentProject}
         />
         <Content
           projects={projects}
           currentProject={currentProject}
+          handleSubmit={this.handleSubmit}
         />
       </div>
     );

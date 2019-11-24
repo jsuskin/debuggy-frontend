@@ -8,8 +8,14 @@ class Content extends Component {
   render() {
     return (
       <div className="content">
-        <TopPanel currentProject={this.props.currentProject} />
-        <BottomPanel />
+        <TopPanel
+          currentProject={this.props.currentProject}
+          handleDeleteIssue={this.props.handleDeleteIssue}
+        />
+        <BottomPanel
+          handleSubmit={this.props.handleSubmit}
+          projects={this.props.projects}
+        />
       </div>
     );
   }

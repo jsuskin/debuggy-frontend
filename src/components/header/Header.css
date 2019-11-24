@@ -11,8 +11,13 @@
 }
 
 .change-theme {
+  display: inline-block;
+  color: transparent;
+  text-shadow: 0 0 0 hsla(0, 0%, 0%, 0.5);
   margin-left: auto;
-  font-size: 35px;
+  padding: 0;
+  margin-right: 30px;
+  font-size: 40px;
   cursor: pointer;
 }
 

@@ -1,11 +1,10 @@
 import React from 'react';
 
 function Project(props) {
-  const { project, idx, handleProjectSelect } = props;
+  const { project, currentProject, handleProjectSelect } = props;
   return (
     <li
-      key={idx}
-      className="sidebar-project-li"
+      className={`sidebar-project-li ${currentProject === project ? 'selected-project' : ''}`}
       onClick={() => handleProjectSelect(project)}
     >
       {project.title}
