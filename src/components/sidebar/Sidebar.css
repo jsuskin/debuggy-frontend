@@ -1,0 +1,16 @@
+.sidebar {
+  grid-area: nav;
+}
+
+.projects-list-container {
+  margin: 0 15px;
+  line-height: 2;
+}
+
+.sidebar-projects-header {
+  font-weight: 700;
+}
+
+.sidebar-project-li {
+  cursor: pointer;
+}

@@ -1,0 +1,24 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  grid-area: main;
+}
+
+.content > * {
+  height: 100%;
+}
+
+.top-panel {
+  padding: 40px 60px;
+}
+
+table {
+  width: 100%;
+  line-height: 1.7;
+}
+
+table, th, td {
+  border: 1px solid hsla(0, 0%, 0%, 0.2);
+  border-collapse: collapse;
+  text-align: center;
+}

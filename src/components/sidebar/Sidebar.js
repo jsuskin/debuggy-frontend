@@ -1,0 +1,30 @@
+import React, { Component } from 'react';
+import Project from './Project';
+import './Sidebar.css';
+
+class Sidebar extends Component {
+
+  render() {
+    const { projects, handleProjectSelect } = this.props;
+    return (
+      <aside className="sidebar">
+        <div className="projects-list-container">
+          <header className="sidebar-projects-header">PROJECTS</header>
+          <hr />
+          <ul className="projects-list">
+            {projects.length ? projects.map((project, idx) => (
+              <Project
+                project={project}
+                idx={idx}
+                handleProjectSelect={handleProjectSelect}
+              />
+            )) : null}
+          </ul>
+        </div>
+      </aside>
+    );
+  }
+
+}
+
+export default Sidebar;

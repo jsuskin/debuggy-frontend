@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: head;
+  user-select: none;
+}
+
+.header * {
+  padding: 0 50px;
+}
+
+.change-theme {
+  margin-left: auto;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.rotate {
+  transform: rotate(-180deg);
+}
