@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
 
-class BottomPanel extends Component {
+class NewIssueForm extends Component {
   state = {
     selectedProject: '',
     expectedOutput: '',
-    actualOutput: '',
-    newProject: false
+    actualOutput: ''
   }
 
   handleChange = e => {
     this.setState({
-      ...this.state,
-      [e.target.name]: e.target.value,
-      newProject: e.target.name === 'selectedProject' && e.target.value === 'Create New Project' ? true : false
+      [e.target.name]: e.target.value
     })
   }
 
   render() {
     const { projects } = this.props;
     return (
-      <div className="bottom-panel">
-        <header className="add-new-issue-header">ADD NEW ISSUE</header>
-        <br />
+      <div className="new-issue-form">
+        <header className="form-header">ADD NEW ISSUE</header>
         <br />
         <form onSubmit={e => {
-          this.props.handleSubmit(e, {...this.state});
+          this.props.handleAddNewIssue(e, {...this.state});
           this.setState({
             selectedProject: '',
             expectedOutput: '',
@@ -40,9 +36,7 @@ class BottomPanel extends Component {
                   <option key={project.id}>{project.title}</option>
                 )
               }) : null}
-              <option>Create New Project</option>
             </select>
-            {this.state.newProject ? <input type="text" /> : null}
           </label>
           <br />
           <label>
@@ -55,7 +49,7 @@ class BottomPanel extends Component {
             <textarea name="actualOutput" value={this.state.actualOutput} onChange={this.handleChange} rows="1" />
           </label>
           <br />
-          <input type="submit" />
+          <input type="submit" value="Add Issue" />
         </form>
       </div>
     );
@@ -63,4 +57,4 @@ class BottomPanel extends Component {
 
 }
 
-export default BottomPanel;
+export default NewIssueForm;

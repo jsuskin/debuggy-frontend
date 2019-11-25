@@ -10,16 +10,21 @@ class App extends Component {
   state = {
     projects: [],
     currentProject: null,
+    newProjectId: null,
     theme: 'light-theme'
   }
 
-  componentDidMount() {
+  fetchProjects = () => {
     fetch(`${url}/projects`)
       .then(res => res.json())
       .then(projects => this.setState({
         projects: projects,
         currentProject: projects[0]
       }))
+  }
+
+  componentDidMount() {
+    this.fetchProjects();
   }
 
   handleThemeChange = () => {
@@ -32,35 +37,70 @@ class App extends Component {
     this.setState({ currentProject: project })
   }
 
-  handleDeleteIssue = () => {
-    console.log('deleting issue')
+  handleDeleteIssue = id => {
+    fetch(`${url}/issues/${id}`, {
+      method: 'DELETE'
+    })
+    this.fetchProjects();
   }
 
-  handleSubmit = (e, data) => {
+  handleAddNewProject = (e, title) => {
     e.preventDefault();
-    const selectedProject = this.state.projects.find(project => project.title === data.selectedProject);
-    if(!selectedProject) {
-      
-    }
+
+    fetch(`${url}/projects`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        "title": title
+      })
+    })
+      .then(res => res.json())
+      .then(project => {
+        this.setState({
+          ...this.state,
+          projects: [...this.state.projects, project],
+          currentProject: project
+        })
+      })
+  }
+
+  handleAddNewIssue = (e, data) => {
+    e.preventDefault();
+
+    const { selectedProject, expectedOutput, actualOutput } = data;
+    let currentProject = this.state.projects.find(project => project.title === selectedProject);
+
     fetch(`${url}/issues`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        "project_id": selectedProject.id,
-        "expected_output": data.expectedOutput,
-        "actual_output": data.actualOutput,
-        "status": "Open"
-      })
-    }).then(res => res.json()).then(issue => {
-      this.setState({
-        projects: [
-          ...this.state.projects,
-          this.state.projects.find(project => project.id === issue.project_id).issues.push(issue)
-        ]
+        "project_id": currentProject.id,
+        "expected_output": expectedOutput,
+        "actual_output": actualOutput,
+        "status": 'Open'
       })
     })
+      .then(res => res.json())
+      .then(issue => {
+        this.setState({
+          ...this.state,
+          projects: this.state.projects.map(project => {
+            if(project === currentProject) {
+              project = {
+                ...project,
+                issues: project.issues ? [...project.issues, issue] : [issue]
+              };
+            }
+            currentProject = project;
+            return project;
+          }),
+          currentProject: currentProject
+        })
+      })
   }
 
   render() {
@@ -80,7 +120,9 @@ class App extends Component {
         <Content
           projects={projects}
           currentProject={currentProject}
-          handleSubmit={this.handleSubmit}
+          handleAddNewProject={this.handleAddNewProject}
+          handleAddNewIssue={this.handleAddNewIssue}
+          handleDeleteIssue={this.handleDeleteIssue}
         />
       </div>
     );

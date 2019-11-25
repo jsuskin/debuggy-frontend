@@ -7,6 +7,11 @@
   line-height: 2;
 }
 
+.projects-list {
+  overflow: scroll;
+  max-height: 80vh;
+}
+
 .sidebar-projects-header {
   font-weight: 700;
 }

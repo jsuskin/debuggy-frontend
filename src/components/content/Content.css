@@ -12,9 +12,9 @@
   padding: 40px 60px;
 }
 
-.add-new-issue-header {
+.form-header {
   font-weight: 700;
-  font-size: 24px;
+  font-size: 21px;
 }
 
 .select-project-default {
@@ -26,6 +26,18 @@ table {
   line-height: 1.9;
 }
 
+tbody {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  max-height: 200px;
+}
+
+thead, tbody tr {
+  display:table;
+  width:100%;
+}
+
 table, th, td {
   border: 1px solid hsla(0, 0%, 0%, 0.2);
   border-collapse: collapse;
@@ -34,7 +46,7 @@ table, th, td {
 
 td {
   font-size: 14px;
-  padding: 6px 10px;
+  padding: 6px 0;
   line-height: 1;
 }
 
@@ -44,6 +56,10 @@ td {
 
 .table-output-column {
   width: 500px;
+}
+
+.table-status-column, .table-delete-column {
+  width: 60px;
 }
 
 form {
@@ -64,4 +80,22 @@ textarea {
   float: right;
   clear: both;
   margin-right: 100px;
+}
+
+#new-project-input {
+  outline: none;
+  width: 62vw;
+  margin-top: 7px;
+  vertical-align: middle;
+  float: right;
+  margin-right: 100px;
+}
+
+#new-project-title {
+  outline: none;
+  width: 62vw;
+}
+
+#add-project-submit {
+  margin: 0 12px;
 }

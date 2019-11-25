@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import TopPanel from './TopPanel';
-import BottomPanel from './BottomPanel';
+import TopPanel from './top-panel/TopPanel';
+import BottomPanel from './bottom-panel/BottomPanel';
 import './Content.css';
 
 class Content extends Component {
@@ -13,7 +13,8 @@ class Content extends Component {
           handleDeleteIssue={this.props.handleDeleteIssue}
         />
         <BottomPanel
-          handleSubmit={this.props.handleSubmit}
+          handleAddNewProject={this.props.handleAddNewProject}
+          handleAddNewIssue={this.props.handleAddNewIssue}
           projects={this.props.projects}
         />
       </div>
