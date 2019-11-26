@@ -72,35 +72,39 @@ class App extends Component {
     const { selectedProject, expectedOutput, actualOutput } = data;
     let currentProject = this.state.projects.find(project => project.title === selectedProject);
 
-    fetch(`${url}/issues`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        "project_id": currentProject.id,
-        "expected_output": expectedOutput,
-        "actual_output": actualOutput,
-        "status": 'Open'
-      })
-    })
-      .then(res => res.json())
-      .then(issue => {
-        this.setState({
-          ...this.state,
-          projects: this.state.projects.map(project => {
-            if(project === currentProject) {
-              project = {
-                ...project,
-                issues: project.issues ? [...project.issues, issue] : [issue]
-              };
-            }
-            currentProject = project;
-            return project;
-          }),
-          currentProject: currentProject
+    if(currentProject.id) {
+      fetch(`${url}/issues`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          "project_id": currentProject.id,
+          "expected_output": expectedOutput,
+          "actual_output": actualOutput,
+          "status": 'Open'
         })
       })
+        .then(res => res.json())
+        .then(issue => {
+          this.setState({
+            ...this.state,
+            projects: this.state.projects.map(project => {
+              if(project === currentProject) {
+                project = {
+                  ...project,
+                  issues: project.issues ? [...project.issues, issue] : [issue]
+                };
+                currentProject = project;
+              }
+              return project;
+            }),
+            currentProject: currentProject
+          })
+        })
+    } else {
+      console.log('please select a project')
+    }
   }
 
   render() {
