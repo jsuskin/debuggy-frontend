@@ -27,7 +27,7 @@ class TopPanel extends Component {
                     <td className="table-delete-column">
                       <span
                         style={{cursor: 'pointer'}}
-                        onClick={() => this.props.handleDeleteIssue(issue.id)}
+                        onClick={() => this.props.handleDeleteIssue(issue.id, issue.project_id)}
                       >
                         🗑
                       </span>

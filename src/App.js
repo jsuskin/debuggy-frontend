@@ -37,11 +37,15 @@ class App extends Component {
     this.setState({ currentProject: project })
   }
 
-  handleDeleteIssue = id => {
-    fetch(`${url}/issues/${id}`, {
+  handleDeleteIssue = (issueId, projectId) => {
+    fetch(`${url}/issues/${issueId}`, {
       method: 'DELETE'
+    }).then(res => {
+      const currentProject = this.state.projects
+        .find(project => project.id === projectId);
+      console.log(currentProject);
     })
-    this.fetchProjects();
+
   }
 
   handleAddNewProject = (e, title) => {
@@ -72,7 +76,7 @@ class App extends Component {
     const { selectedProject, expectedOutput, actualOutput } = data;
     let currentProject = this.state.projects.find(project => project.title === selectedProject);
 
-    if(currentProject.id) {
+    if(currentProject && currentProject.id) {
       fetch(`${url}/issues`, {
         method: 'POST',
         headers: {
